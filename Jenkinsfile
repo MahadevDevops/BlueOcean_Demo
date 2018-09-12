@@ -7,14 +7,23 @@ pipeline {
       }
     }
     stage('Build') {
-      steps {
-        node(label: 'Mynode') {
-          dir(path: '/tmp') {
-            sh 'echo \'Hello from temp\' >> tmp.txt'
+      parallel {
+        stage('Build') {
+          steps {
+            node(label: 'Mynode') {
+              dir(path: '/tmp') {
+                sh 'echo \'Hello from temp\' >> tmp.txt'
+              }
+
+            }
+
           }
-
         }
-
+        stage('Build3') {
+          steps {
+            build(job: 'mvns', propagate: true, quietPeriod: 10, wait: true)
+          }
+        }
       }
     }
   }
