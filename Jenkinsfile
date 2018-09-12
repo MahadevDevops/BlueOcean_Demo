@@ -4,6 +4,7 @@ pipeline {
     stage('Checkout') {
       steps {
         //sh 'sudo apt update -y'
+        echo "Hello"
       }
     }
     stage('Build') {
@@ -21,7 +22,8 @@ pipeline {
         }
         stage('Build3') {
           steps {
-            build(job: 'mvns', propagate: true, quietPeriod: 10, wait: true)
+            //build(job: 'mvns', propagate: true, quietPeriod: 10, wait: true)
+             echo "Hello"
           }
         }
       }
